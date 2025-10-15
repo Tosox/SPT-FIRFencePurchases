@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFramework>net9.0</TargetFramework>
+    <OutputType>Library</OutputType>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Tosox.FIRFencePurchases</RootNamespace>
+    <AssemblyName>Tosox.FIRFencePurchases</AssemblyName>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Configurations>Debug;Release</Configurations>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="SPTarkov.Common" Version="4.0.0" />
+    <PackageReference Include="SPTarkov.DI" Version="4.0.0" />
+    <PackageReference Include="SPTarkov.Server.Core" Version="4.0.0" />
+    <PackageReference Include="SPTarkov.Reflection" Version="4.0.0" />
+  </ItemGroup>
+</Project>

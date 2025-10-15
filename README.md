@@ -7,7 +7,7 @@ Give Fence’s stock a boost! **FIR Fence Purchases** for *Single Player Tarkov*
 ## 📁 Installation
 
 * Download the latest release
-* Copy the `user` folder into your SPT folder
+* Copy the `SPT` folder into your SPT installation
 * Start the game
 
 ## 📷 Preview
