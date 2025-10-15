@@ -16,12 +16,14 @@ namespace Tosox.FIRFencePurchases.Patches
         [PatchPostfix]
         public static void PatchPostfix(ref TraderAssort __result)
         {
-            __result.Items = [.. __result.Items
-                .Select(item => {
-                    item.Upd ??= new Upd();
-                    item.Upd.SpawnedInSession = true;
-                    return item;
-                })];
+            // Mark items as FIR in the trader's assortment only
+            // NOTE: Items marked as FIR in the trader's assortment will not have their
+            //       FIR status when bought
+            foreach (var item in __result.Items)
+            {
+                item.Upd ??= new Upd();
+                item.Upd.SpawnedInSession = true;
+            }
         }
     }
 }

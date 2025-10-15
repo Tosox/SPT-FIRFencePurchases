@@ -17,9 +17,9 @@ namespace Tosox.FIRFencePurchases.Patches
         [PatchPrefix]
         public static bool PatchPrefix(ProcessBuyTradeRequestData buyRequestData, ref bool foundInRaid)
         {
-            var shouldMarkFIR = buyRequestData.Type == ItemEventActions.BUY_FROM_TRADER
+            // Mark bought item as FIR
+            foundInRaid |= buyRequestData.Type == ItemEventActions.BUY_FROM_TRADER
                 && buyRequestData.TransactionId == Traders.FENCE;
-            foundInRaid = foundInRaid || shouldMarkFIR;
 
             return true;
         }
