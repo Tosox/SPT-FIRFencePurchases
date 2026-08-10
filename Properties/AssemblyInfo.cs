@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using Tosox.FIRFencePurchases;
 
-[assembly: AssemblyTitle("FIR Fence Purchases")]
-[assembly: AssemblyDescription("SPT mod that ensures that items bought from Fence are FIR")]
-[assembly: AssemblyCompany("Tosox")]
-[assembly: AssemblyProduct("SPT Mods")]
-[assembly: AssemblyCopyright("Copyright © Tosox 2025")]
-[assembly: AssemblyVersion("1.0.0")]
-[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyTitle(ModMetadata.ModName)]
+[assembly: AssemblyCompany(ModMetadata.ModSource)]
+[assembly: AssemblyProduct(ModMetadata.ModName)]
+[assembly: AssemblyCopyright("Copyright © " + ModMetadata.ModAuthor + " 2026")]
+[assembly: AssemblyVersion(ModMetadata.ModVersion)]
+[assembly: AssemblyFileVersion(ModMetadata.ModVersion)]
 [assembly: ComVisible(false)]

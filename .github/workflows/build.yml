@@ -1,4 +1,4 @@
-name: MSBuild
+name: Build
 
 on:
   push:
@@ -8,32 +8,28 @@ on:
   workflow_call:
 
 env:
-  SOLUTION_FILE_PATH: .
   BUILD_CONFIGURATION: Release
-  BUILD_PLATFORM: Any CPU
 
 permissions:
   contents: read
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
       with:
-        msbuild-architecture: x64
+        dotnet-version: 10.0
         
     - name: Restore NuGet packages
-      working-directory: ${{ env.GITHUB_WORKSPACE }}
-      run: msbuild /t:Restore /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:Platform="${{ env.BUILD_PLATFORM }}" ${{ env.SOLUTION_FILE_PATH }}
+      run: dotnet restore
 
     - name: Build Solution
-      working-directory: ${{ env.GITHUB_WORKSPACE }}
-      run: msbuild /m /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:Platform="${{ env.BUILD_PLATFORM }}" ${{ env.SOLUTION_FILE_PATH }}
+      run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
 
     - name: Archive Build Artifacts
       uses: actions/upload-artifact@v4

@@ -1,12 +1,12 @@
 ﻿using HarmonyLib;
 using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Services.Commerce;
 using System.Reflection;
 
 namespace Tosox.FIRFencePurchases.Patches
 {
-    public class FenceServicePatch : AbstractPatch
+    internal class FenceServicePatch : AbstractPatch
     {
         protected override MethodBase GetTargetMethod()
         {
