@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       build-ver:
-        description: Build version
+        description: Release version
         required: true
-        default: v0.0.0
+        default: v1.0.0
         
 env:
   PLUGIN_NAME: Tosox.FIRFencePurchases
@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Download Build Artifacts
       uses: actions/download-artifact@v4
@@ -34,21 +34,18 @@ jobs:
 
     - name: Create Release Zip
       run: |
-        mkdir -p release/SPT/user/mods/${{ env.PLUGIN_NAME }}
-        cp -a artifact/*.dll release/SPT/user/mods/${{ env.PLUGIN_NAME }}/
+        mkdir -p release/SPT_Runtime/user/mods/${{ env.PLUGIN_NAME }}
+        cp -a artifact/*.dll release/SPT_Runtime/user/mods/${{ env.PLUGIN_NAME }}/
         cd release
         zip -r ../${{ env.PLUGIN_NAME }}-${{ github.event.inputs.build-ver }}.zip .
         cd ..
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.event.inputs.build-ver }}
         name: ${{ github.event.inputs.build-ver }}
         files: |
           ${{ env.PLUGIN_NAME }}-${{ github.event.inputs.build-ver }}.zip
-        draft: false
-        prerelease: false
+        fail_on_unmatched_files: true
         make_latest: true

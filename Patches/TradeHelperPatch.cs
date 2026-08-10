@@ -1,13 +1,13 @@
 ﻿using HarmonyLib;
 using SPTarkov.Reflection.Patching;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Commerce;
 using SPTarkov.Server.Core.Models.Eft.Trade;
 using SPTarkov.Server.Core.Models.Enums;
 using System.Reflection;
 
 namespace Tosox.FIRFencePurchases.Patches
 {
-    public class TradeHelperPatch : AbstractPatch
+    internal class TradeHelperPatch : AbstractPatch
     {
         protected override MethodBase GetTargetMethod()
         {
