@@ -1,20 +1,23 @@
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
+using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Spt.Mod;
-using Tosox.FIRFencePurchases.Patches;
 
 namespace Tosox.FIRFencePurchases
 {
-    [Injectable(TypePriority = OnLoadOrder.PostLoad)]
+    [Injectable(TypePriority = OnLoadOrder.Preload + 1)]
     public class FIRFencePurchases(
-        ISptLogger<FIRFencePurchases> logger
+        ISptLogger<FIRFencePurchases> logger,
+        IEnumerable<IRuntimePatch> patches
     ) : IOnLoad
     {
         public Task OnLoadAsync(CancellationToken cancellationToken)
         {
-            new TradeHelperPatch().Enable();
-            new FenceServicePatch().Enable();
+            foreach (var patch in patches)
+            {
+                patch.Enable();
+            }
 
             logger.Info($"[{ModMetadata.ModName}] Bought items from Fence will now be marked as Found in Raid");
             return Task.CompletedTask;
